@@ -1511,7 +1511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 1542034107}
-  moveSpeed: 5
+  moveSpeed: 7
   gravity: -4
   groundCheckDistance: 0.1
   groundCheck: {fileID: 1404636402}
