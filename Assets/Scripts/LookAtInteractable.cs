@@ -1,12 +1,24 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LookAtInteractable : MonoBehaviour
 {
     public float maxDistance = 5f;
     public LayerMask interactableLayer;
-    
-    private GameObject currentHighlighted;
-    private IHighlightable lastHighlightable;
+
+    public Image crosshairImage;
+    public Sprite defaultCrosshair;
+    public Sprite interactableCrosshair;
+
+    public float highlightScale = 1.3f;
+
+    private Vector3 originalScale;
+    private bool isLookingAtInteractable = false;
+
+    void Start()
+    {
+        originalScale = crosshairImage.rectTransform.localScale;
+    }
 
     void Update()
     {
@@ -15,31 +27,21 @@ public class LookAtInteractable : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, maxDistance, interactableLayer))
         {
-            GameObject hitObject = hit.collider.gameObject;
-            var highlightable = hitObject.GetComponent<IHighlightable>();
-
-            if (highlightable != null)
+            if (!isLookingAtInteractable)
             {
-                if (highlightable != lastHighlightable)
-                {
-                    Unhighlight();
-                    highlightable.Highlight();
-                    lastHighlightable = highlightable;
-                }
+                crosshairImage.sprite = interactableCrosshair;
+                crosshairImage.rectTransform.localScale = originalScale * highlightScale;
+                isLookingAtInteractable = true;
             }
-        }
-        else
-        {
-            Unhighlight();
-        }
-    }
 
-    void Unhighlight()
-    {
-        if (lastHighlightable != null)
+            return;
+        }
+
+        if (isLookingAtInteractable)
         {
-            lastHighlightable.Unhighlight();
-            lastHighlightable = null;
+            crosshairImage.sprite = defaultCrosshair;
+            crosshairImage.rectTransform.localScale = originalScale;
+            isLookingAtInteractable = false;
         }
     }
 }

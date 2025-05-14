@@ -14,11 +14,9 @@ public class HighlightObject : MonoBehaviour, IHighlightable
 
     public void Highlight()
     {
-        rend.material = highlightMaterial;
     }
 
     public void Unhighlight()
     {
-        rend.material = originalMaterial;
     }
 }
