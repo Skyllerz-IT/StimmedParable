@@ -2847,26 +2847,6 @@ Transform:
   - {fileID: 1633607818}
   m_Father: {fileID: 547049221}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1235649026 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 905095172552929323, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
-  m_PrefabInstance: {fileID: 1940641232}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1235649028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235649026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e12447ec235dc443287d3db921b655c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TouchDist: {x: 0, y: 0}
-  PointerOld: {x: 0, y: 0}
-  Pressed: 0
 --- !u!1 &1287390809
 GameObject:
   m_ObjectHideFlags: 0
@@ -4178,7 +4158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4078ab82d17404fa6b0dff76a234e3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _FixedTouchField: {fileID: 1235649028}
+  _FixedTouchField: {fileID: 0}
   _CameraLook: {fileID: 1106693714}
 --- !u!114 &1937193864
 MonoBehaviour:
@@ -4316,10 +4296,7 @@ PrefabInstance:
     - {fileID: 4770028380649847469, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 905095172552929323, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1235649028}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
 --- !u!1 &1948131142
 GameObject:
