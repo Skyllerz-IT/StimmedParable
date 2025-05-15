@@ -7,7 +7,6 @@ namespace DefaultNamespace
     public class InteractionController : MonoBehaviour
     {
         [SerializeField] Camera playerCamera;
-        [SerializeField] TextMeshProUGUI interactionText;
         [SerializeField] float interactionDistance;
         [SerializeField] ClickTouchField touchField;
         [SerializeField] LayerMask interactableLayer; // Optional layer mask to filter interactable objects
@@ -35,7 +34,6 @@ namespace DefaultNamespace
         public void Update()
         {
             UpdateCurrentInteractable();
-            UpdateInteractionText();
             CheckForInteractionInput();
         }
 
@@ -63,17 +61,6 @@ namespace DefaultNamespace
             {
                 currentTargetedInteractable = null;
             }
-        }
-
-        void UpdateInteractionText()
-        {
-            if (currentTargetedInteractable == null)
-            {
-                interactionText.text = string.Empty;
-                return;
-            }
-            
-            interactionText.text = currentTargetedInteractable.InteractMessage;
         }
 
         void CheckForInteractionInput()

@@ -2623,7 +2623,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555409450}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0602eccbfa7604acba6a3bbf2557df67, type: 3}
   m_Name: 
@@ -3321,6 +3321,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 670241654994172437, guid: 9124bd14a010641829327db0e9a6b5b9, type: 3}
+      propertyPath: touchField
+      value: 
+      objectReference: {fileID: 1235649027}
     - target: {fileID: 2479127408766183343, guid: 9124bd14a010641829327db0e9a6b5b9, type: 3}
       propertyPath: m_Name
       value: Player
