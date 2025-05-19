@@ -3,55 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class FixedTouchField : MonoBehaviour , IPointerDownHandler, IPointerUpHandler
+public class FixedTouchField : MonoBehaviour
 {
-    [HideInInspector]
     public Vector2 TouchDist;
-    [HideInInspector]
-    public Vector2 PointerOld;
-    [HideInInspector]
-    protected int PointerId;
-    [HideInInspector]
-    public bool Pressed;
+    private Vector2 pointerOld;
+    private int pointerId = -1;
+    private bool pressed = false;
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (Pressed)
+        foreach (Touch touch in Input.touches)
         {
-            if (PointerId >= 0 && PointerId < Input.touches.Length)
+            if (!pressed && touch.phase == TouchPhase.Began && IsTouchInside(touch.position))
             {
-                TouchDist = Input.touches[PointerId].position - PointerOld;
-                PointerOld = Input.touches[PointerId].position;
+                pointerId = touch.fingerId;
+                pointerOld = touch.position;
+                pressed = true;
             }
-            else
+
+            if (pressed && touch.fingerId == pointerId)
             {
-                TouchDist = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - PointerOld;
-                PointerOld = Input.mousePosition;
+                if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+                {
+                    TouchDist = touch.position - pointerOld;
+                    pointerOld = touch.position;
+                }
+                else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+                {
+                    pressed = false;
+                    TouchDist = Vector2.zero;
+                }
             }
         }
-        else
-        {
-            TouchDist = new Vector2();
-        }
+
+        if (!pressed)
+            TouchDist = Vector2.zero;
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    private bool IsTouchInside(Vector2 screenPos)
     {
-        Pressed = true;
-        PointerId = eventData.pointerId;
-        PointerOld = eventData.position;
-    }
+        RectTransform rt = GetComponent<RectTransform>();
+        if (rt == null) return true; // se non è UI, accetta tutto
 
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        Pressed = false;
+        Vector2 localPoint;
+        return RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            rt, screenPos, null, out localPoint) && rt.rect.Contains(localPoint);
     }
 }
