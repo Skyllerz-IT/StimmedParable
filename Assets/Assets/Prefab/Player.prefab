@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3983485478350295203}
   - component: {fileID: 3933858101586446040}
   - component: {fileID: 2527423027167707923}
-  - component: {fileID: 4019106834139708446}
-  - component: {fileID: 1242803370779330289}
-  - component: {fileID: 4815402382692874172}
+  - component: {fileID: 4295938657555398751}
+  - component: {fileID: 464451230742787560}
+  - component: {fileID: 3879132868705037207}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -168,7 +168,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &4019106834139708446
+--- !u!114 &4295938657555398751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,18 +177,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 538331687369034382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6371dedf7473b4cae8872a30a6bb3b67, type: 3}
+  m_Script: {fileID: 11500000, guid: a595e3af602fc48a9b698480dac37e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 0}
-  moveSpeed: 7
-  gravity: -4
+  moveSpeed: 5
+  gravity: -9.81
   groundCheckDistance: 0.1
   groundCheck: {fileID: 0}
   groundMask:
     serializedVersion: 2
-    m_Bits: 64
---- !u!114 &1242803370779330289
+    m_Bits: 0
+--- !u!114 &464451230742787560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,23 +197,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 538331687369034382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c379cab10ece24566823d7fdaba84f06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4815402382692874172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 538331687369034382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4078ab82d17404fa6b0dff76a234e3f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c423c1976f7b4c16b20e634b6b07b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _FixedTouchField: {fileID: 0}
-  _CameraLook: {fileID: 6752625943159419533}
+  _CameraLook: {fileID: 3690095375627653878}
+--- !u!114 &3879132868705037207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538331687369034382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8c69709d1e446659be342fffd320aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2479127408766183343
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,8 +258,7 @@ GameObject:
   - component: {fileID: 5511556830225942464}
   - component: {fileID: 4126660438899042835}
   - component: {fileID: 771967748121072322}
-  - component: {fileID: 6752625943159419533}
-  - component: {fileID: 4701032027459337828}
+  - component: {fileID: 3690095375627653878}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -385,7 +384,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &6752625943159419533
+--- !u!114 &3690095375627653878
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -394,25 +393,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3832507691515804616}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfb4315257aba4d6a9406f6f6351c310, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a15ef0bce07b483b9dd1fbfc8dc0bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerBody: {fileID: 7851526856758513391}
+  PlayerBody: {fileID: 3937203057595102639}
   LockAxis: {x: 0, y: 0}
-  Sensitivity: 15
---- !u!114 &4701032027459337828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3832507691515804616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28a2fc35f9abb42da834a6ed17ad247e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDistance: 5
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 8
+  Sensitivity: 20
