@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4019106834139708446}
   - component: {fileID: 1242803370779330289}
   - component: {fileID: 4815402382692874172}
+  - component: {fileID: 670241654994172437}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -214,6 +215,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _FixedTouchField: {fileID: 0}
   _CameraLook: {fileID: 6752625943159419533}
+--- !u!114 &670241654994172437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538331687369034382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6cea14c913b4d7bbf1e509e97dbd1f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 5511556830225942464}
+  interactionText: {fileID: 0}
+  interactionDistance: 5
+  touchField: {fileID: 0}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &2479127408766183343
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,3 +436,7 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 8
+  crosshairImage: {fileID: 0}
+  defaultCrosshair: {fileID: 0}
+  interactableCrosshair: {fileID: 0}
+  highlightScale: 1.3

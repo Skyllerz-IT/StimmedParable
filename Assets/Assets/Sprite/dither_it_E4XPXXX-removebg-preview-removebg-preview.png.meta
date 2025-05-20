@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 864f222d6e1124880bb9577f8fca63eb
+guid: cb9e39505789d450a8e03607d2a0c0c0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crouch_0
+      name: dither_it_E4XPXXX-removebg-preview-removebg-preview_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 986
-        height: 986
+        width: 500
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a056b6fe6ec054658962805cf90772b9
-      internalID: 457905795
+      spriteID: d7c1a5b7f5f7948549893f86af7f4c42
+      internalID: 1845432168
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cc2d24fd28bd34f77802d26ed058c012
+    spriteID: 0bd74c93550bc493292c5d7b944312b0
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      crouch_0: 457905795
+      dither_it_E4XPXXX-removebg-preview-removebg-preview_0: 1845432168
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
