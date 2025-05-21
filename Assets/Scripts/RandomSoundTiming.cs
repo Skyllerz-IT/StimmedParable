@@ -3,8 +3,8 @@ using UnityEngine;
 public class RandomSoundTiming : MonoBehaviour
 {
     public AudioClip soundClip;        // Il suono da riprodurre
-    public float minDelay = 2f;        // Minimo tempo di attesa
-    public float maxDelay = 5f;        // Massimo tempo di attesa
+    public float minDelay = 30f;        // Minimo tempo di attesa
+    public float maxDelay = 90f;        // Massimo tempo di attesa
 
     private AudioSource audioSource;
 
@@ -13,6 +13,9 @@ public class RandomSoundTiming : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        
+        audioSource.volume = 0.2f;
 
         StartCoroutine(PlaySoundAtRandomTime());
     }

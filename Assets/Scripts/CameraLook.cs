@@ -8,7 +8,7 @@ public class CameraLook : MonoBehaviour
     private float XRotation;
     [SerializeField] private Transform PlayerBody;
     public Vector2 LockAxis;
-    public float Sensitivity = 15f;
+    public float Sensitivity = 10f;
     
     void Start()
     {
