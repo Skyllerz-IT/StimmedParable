@@ -10,7 +10,7 @@ public class LookAtInteractable : MonoBehaviour
     public Sprite defaultCrosshair;
     public Sprite interactableCrosshair;
 
-    public float highlightScale = 1.3f;
+    public float highlightScale = 15f;
 
     private Vector3 originalScale;
     private bool isLookingAtInteractable = false;
