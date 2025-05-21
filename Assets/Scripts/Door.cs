@@ -7,6 +7,8 @@ public class Door : MonoBehaviour, IInteractable
 
     [SerializeField] private float openAngle = 90f;
     [SerializeField] private float openSpeed = 2f;
+    
+    [SerializeField] private DoorSoundPlayer soundPlayer;
 
     private bool isOpen = false;
     private Quaternion closedRotation;
@@ -35,11 +37,13 @@ public class Door : MonoBehaviour, IInteractable
     {
         isOpen = true;
         targetRotation = closedRotation * Quaternion.Euler(0, openAngle, 0);
+        soundPlayer?.PlayOpenSound();
     }
 
     private void CloseDoor()
     {
         isOpen = false;
         targetRotation = closedRotation;
+        soundPlayer?.PlayCloseSound();
     }
 }
