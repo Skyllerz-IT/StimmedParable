@@ -20,19 +20,29 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        // Controllo se è a terra
+        // Check if grounded
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f; // Mantiene il player incollato al terreno
+            velocity.y = -2f;
         }
 
-        // Movimento orizzontale
-        Vector3 move = transform.right * joystick.Horizontal + transform.forward * joystick.Vertical;
+        // Movement input (joystick or keyboard)
+        float horizontal = joystick.Horizontal;
+        float vertical = joystick.Vertical;
+
+        if (Mathf.Approximately(horizontal, 0f) && Mathf.Approximately(vertical, 0f))
+        {
+            // No joystick input, fallback to keyboard
+            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
+        }
+
+        Vector3 move = transform.right * horizontal + transform.forward * vertical;
         controller.Move(move * moveSpeed * Time.deltaTime);
 
-        // Applica la gravità manualmente
+        // Gravity
         velocity.y += gravity * Time.deltaTime;
         velocity.y = Mathf.Max(velocity.y, -10f);
         controller.Move(velocity * Time.deltaTime);
