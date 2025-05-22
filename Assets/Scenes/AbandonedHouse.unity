@@ -10412,6 +10412,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 336741744}
     - target: {fileID: 4701032027459337828, guid: 9124bd14a010641829327db0e9a6b5b9, type: 3}
+      propertyPath: highlightScale
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701032027459337828, guid: 9124bd14a010641829327db0e9a6b5b9, type: 3}
       propertyPath: defaultCrosshair
       value: 
       objectReference: {fileID: 21300000, guid: 84487d73ca4b791498332d8f6858417f, type: 3}
