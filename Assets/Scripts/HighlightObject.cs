@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HighlightObject : MonoBehaviour, IHighlightable
+public class HighlightObject : MonoBehaviour
 {
     private Material originalMaterial;
     public Material highlightMaterial;
@@ -14,11 +14,9 @@ public class HighlightObject : MonoBehaviour, IHighlightable
 
     public void Highlight()
     {
-        rend.material = highlightMaterial;
     }
 
     public void Unhighlight()
     {
-        rend.material = originalMaterial;
     }
 }
