@@ -4,7 +4,7 @@ public class PlayerMove : MonoBehaviour
 {
     public FixedJoystick joystick;
     public float moveSpeed = 5f;
-    public float gravity = -4f;
+    public float gravity = 9.81f;
     public float groundCheckDistance = 0.1f;
     public Transform groundCheck;
     public LayerMask groundMask;
@@ -34,16 +34,16 @@ public class PlayerMove : MonoBehaviour
 
         if (Mathf.Approximately(horizontal, 0f) && Mathf.Approximately(vertical, 0f))
         {
-            // No joystick input, fallback to keyboard
-            horizontal = Input.GetAxis("Horizontal");
-            vertical = Input.GetAxis("Vertical");
+            // No joystick input, fallback to keyboard (WASD only)
+            horizontal = Input.GetKey(KeyCode.D) ? 1f : Input.GetKey(KeyCode.A) ? -1f : 0f;
+            vertical = Input.GetKey(KeyCode.W) ? 1f : Input.GetKey(KeyCode.S) ? -1f : 0f;
         }
 
         Vector3 move = transform.right * horizontal + transform.forward * vertical;
         controller.Move(move * moveSpeed * Time.deltaTime);
 
         // Gravity
-        velocity.y += gravity * Time.deltaTime;
+        velocity.y -= gravity * Time.deltaTime;
         velocity.y = Mathf.Max(velocity.y, -10f);
         controller.Move(velocity * Time.deltaTime);
     }

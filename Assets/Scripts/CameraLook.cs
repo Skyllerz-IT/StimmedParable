@@ -9,6 +9,7 @@ public class CameraLook : MonoBehaviour
     [SerializeField] private Transform PlayerBody;
     public Vector2 LockAxis;
     public float Sensitivity = 10f;
+    public float ArrowKeySensitivity = 50f;
     
     void Start()
     {
@@ -19,6 +20,16 @@ public class CameraLook : MonoBehaviour
     {
         XMove = LockAxis.x * Sensitivity * Time.deltaTime;
         YMove = LockAxis.y * Sensitivity * Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+            XMove -= ArrowKeySensitivity * Time.deltaTime;
+        if (Input.GetKey(KeyCode.RightArrow))
+            XMove += ArrowKeySensitivity * Time.deltaTime;
+        if (Input.GetKey(KeyCode.UpArrow))
+            YMove += ArrowKeySensitivity * Time.deltaTime;
+        if (Input.GetKey(KeyCode.DownArrow))
+            YMove -= ArrowKeySensitivity * Time.deltaTime;
+
         XRotation -= YMove;
         XRotation = Mathf.Clamp(XRotation, -90f, 90f);
         
