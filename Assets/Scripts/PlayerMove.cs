@@ -47,4 +47,15 @@ public class PlayerMove : MonoBehaviour
         velocity.y = Mathf.Max(velocity.y, -10f);
         controller.Move(velocity * Time.deltaTime);
     }
+
+    public void Die()
+    {
+        Debug.Log("Player has died!");
+        // TODO: Add death logic (e.g., reload scene, show UI, etc.)
+        
+        // Example: Reload the current scene
+        
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
 }
+
