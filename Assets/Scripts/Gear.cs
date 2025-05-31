@@ -4,8 +4,13 @@ using DefaultNamespace;
 public class Gear : MonoBehaviour, IPickupable
 {
     public string InteractMessage => "Pick up Gear";
-
     private bool isPickedUp = false;
+    private Rigidbody rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     public void Interact(InteractionController interactionController)
     {
@@ -19,11 +24,21 @@ public class Gear : MonoBehaviour, IPickupable
     public void Grab(PickupController pickupController)
     {
         isPickedUp = true;
-        transform.SetParent(pickupController.transform);
-        transform.localPosition = Vector3.zero;
+        pickupController.GrabPickup(this); // <-- Add this line
+        if (pickupController.PickupHolder != null)
+        {
+            transform.SetParent(pickupController.PickupHolder);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+        }
+        else
+        {
+            transform.SetParent(pickupController.transform);
+            transform.localPosition = Vector3.zero;
+        }
         var col = GetComponent<Collider>();
-        if (col) col.enabled = false;
-        // Optionally: Add to inventory or UI
+        if (col) col.enabled = true;
+        if (rb) rb.isKinematic = true;
         Debug.Log("Gear picked up!");
     }
 
@@ -33,6 +48,7 @@ public class Gear : MonoBehaviour, IPickupable
         transform.SetParent(null);
         var col = GetComponent<Collider>();
         if (col) col.enabled = true;
+        if (rb) rb.isKinematic = false;
         Debug.Log("Gear dropped!");
     }
 
@@ -44,9 +60,7 @@ public class Gear : MonoBehaviour, IPickupable
 
     public void Use()
     {
-        // Logic to use the gear on the grandfather clock
         Debug.Log("Gear used on the grandfather clock!");
-        // Example: Notify the clock, destroy or disable the gear, etc.
         Destroy(gameObject);
     }
 }
