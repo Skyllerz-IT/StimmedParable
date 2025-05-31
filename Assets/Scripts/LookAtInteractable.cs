@@ -9,6 +9,7 @@ public class LookAtInteractable : MonoBehaviour
     public Image crosshairImage;
     public Sprite defaultCrosshair;
     public Sprite interactableCrosshair;
+    public Sprite anomalyCrosshair;
 
     public float highlightScale = 15f;
 
@@ -27,13 +28,25 @@ public class LookAtInteractable : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, maxDistance, interactableLayer))
         {
-            if (!isLookingAtInteractable)
+            int anomalyLayer = LayerMask.NameToLayer("Anomaly");
+            if (hit.collider.gameObject.layer == anomalyLayer && anomalyCrosshair != null)
+            {
+                crosshairImage.sprite = anomalyCrosshair;
+            }
+            else
             {
                 crosshairImage.sprite = interactableCrosshair;
-                crosshairImage.rectTransform.localScale = originalScale * highlightScale;
-                isLookingAtInteractable = true;
             }
-
+            crosshairImage.rectTransform.localScale = originalScale * highlightScale;
+            isLookingAtInteractable = true;
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                var anomaly = hit.collider.GetComponent<InteractiveAnomaly>();
+                if (anomaly != null)
+                {
+                    anomaly.Interact();
+                }
+            }
             return;
         }
 
