@@ -821,11 +821,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375233821}
   m_Mesh: {fileID: 3396731576297371425, guid: b424194cc999e499082400a2fe2e9536, type: 3}
---- !u!4 &406112467 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3873861560831530862, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-  m_PrefabInstance: {fileID: 1137970981500033860}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -5592,71 +5587,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6030888920678581656}
   m_Mesh: {fileID: -4657883910512380055, guid: 7cfe40240ea134b33adb16aa0aaa5d6e, type: 3}
---- !u!1001 &1137970981500033860
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8718330983804739463}
-    m_Modifications:
-    - target: {fileID: 3873861560831530862, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 5999.9995
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873861560831530862, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5999.9995
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873861560831530862, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873861560831530862, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873861560831530862, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.454
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873861560831530862, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873861560831530862, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873861560831530862, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873861560831530862, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873861560831530862, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873861560831530862, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873861560831530862, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4506247510021836244, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
-      propertyPath: m_Name
-      value: cordless phone
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e682333877d84b3db57b40314fa8543, type: 3}
 --- !u!4 &1246117756235639925
 Transform:
   m_ObjectHideFlags: 0
@@ -7697,7 +7627,6 @@ Transform:
   - {fileID: 2188890142829158721}
   - {fileID: 6458393693383420803}
   - {fileID: 5048556388175113891}
-  - {fileID: 406112467}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
