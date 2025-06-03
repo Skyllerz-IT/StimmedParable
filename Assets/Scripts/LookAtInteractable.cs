@@ -16,9 +16,13 @@ public class LookAtInteractable : MonoBehaviour
     private Vector3 originalScale;
     private bool isLookingAtInteractable = false;
 
+    public ClickTouchField touchField;
+
     void Start()
     {
         originalScale = crosshairImage.rectTransform.localScale;
+        if (touchField != null)
+            touchField.OnTap += OnTouchTap;
     }
 
     void Update()
@@ -37,8 +41,8 @@ public class LookAtInteractable : MonoBehaviour
             {
                 crosshairImage.sprite = interactableCrosshair;
             }
-            crosshairImage.rectTransform.localScale = originalScale * highlightScale;
-            isLookingAtInteractable = true;
+                crosshairImage.rectTransform.localScale = originalScale * highlightScale;
+                isLookingAtInteractable = true;
             if (Input.GetKeyDown(KeyCode.E))
             {
                 var anomaly = hit.collider.GetComponent<InteractiveAnomaly>();
@@ -55,6 +59,21 @@ public class LookAtInteractable : MonoBehaviour
             crosshairImage.sprite = defaultCrosshair;
             crosshairImage.rectTransform.localScale = originalScale;
             isLookingAtInteractable = false;
+        }
+    }
+
+    private void OnTouchTap()
+    {
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, maxDistance, interactableLayer))
+        {
+            var anomaly = hit.collider.GetComponent<InteractiveAnomaly>();
+            if (anomaly != null)
+            {
+                anomaly.Interact();
+            }
         }
     }
 }
