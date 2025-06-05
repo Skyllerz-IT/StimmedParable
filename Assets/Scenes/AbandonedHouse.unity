@@ -1616,6 +1616,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1856719289599210240, guid: efc4216c265244689b13c06e9055df2a, type: 3}
+      propertyPath: m_text
+      value: "Something feels off in this house\u2026\nObjects aren\u2019t where
+        you left them, rooms look slightly different each time you enter, and sometimes,
+        you can sense that you\u2019re not alone. Subtle anomalies begin to appear;
+        items out of place, flickering lights, reflections that shouldn\u2019t be
+        there.\nPay close attention. When you notice something unusual, interact
+        with it: observe it closely, touch it, investigate. Identifying these distortions
+        is the only way to protect yourself. The longer they go unnoticed, the more
+        dangerous they become."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856719289599210240, guid: efc4216c265244689b13c06e9055df2a, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3149800401529731888, guid: efc4216c265244689b13c06e9055df2a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -393
@@ -8013,6 +8028,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7683944402037373104}
     m_Modifications:
+    - target: {fileID: -7209299098070671911, guid: 39711f51744b54e94ab04b4c2f4e35f7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3eda5cea4f75b4d7983739295fd3105d, type: 2}
+    - target: {fileID: -2661625998650477860, guid: 39711f51744b54e94ab04b4c2f4e35f7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0692a6472067443698a1ccb9915d9fcb, type: 2}
     - target: {fileID: -8679921383154817045, guid: 1ebcd28eb26d1482fa248251445b528b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8
@@ -8073,14 +8096,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: safe1
       objectReference: {fileID: 0}
-    - target: {fileID: -7209299098070671911, guid: 39711f51744b54e94ab04b4c2f4e35f7, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 3eda5cea4f75b4d7983739295fd3105d, type: 2}
-    - target: {fileID: -2661625998650477860, guid: 39711f51744b54e94ab04b4c2f4e35f7, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 0692a6472067443698a1ccb9915d9fcb, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
