@@ -6,6 +6,8 @@ namespace DefaultNamespace
     public class PickupController: MonoBehaviour
     {
         [SerializeField] Transform pickupHolder;
+        public Transform PickupHolder => pickupHolder;
+        public Gear HeldGear => currentPickup as Gear;
 
         IPickupable currentPickup;
         public bool HasPickup => currentPickup != null;
