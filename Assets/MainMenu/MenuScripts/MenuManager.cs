@@ -41,7 +41,7 @@ public class MenuManager : MonoBehaviour
             fadePanel.color = new Color(0, 0, 0, 1);
         }
         // Load the game scene
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     IEnumerator FadeOut()
