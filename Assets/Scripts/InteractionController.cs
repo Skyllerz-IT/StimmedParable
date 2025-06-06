@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DefaultNamespace;
 
 namespace DefaultNamespace
 {
@@ -101,7 +102,7 @@ namespace DefaultNamespace
 
             public void Interact(InteractionController interactionController)
             {
-                _legacyInteractable.OnInteraction();
+                _legacyInteractable.Interact();
             }
         }
     }

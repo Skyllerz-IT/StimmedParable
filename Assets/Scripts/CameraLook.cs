@@ -11,9 +11,6 @@ public class CameraLook : MonoBehaviour
     public Vector2 LockAxis;
     public float Sensitivity = 10f;
     public float ArrowKeySensitivity = 50f;
-    public Slider sensitivitySlider;
-    public Slider brightnessSlider;
-    public Slider audioSlider;
     
     void Start()
     {

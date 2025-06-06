@@ -1,5 +1,5 @@
-using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
@@ -62,7 +62,7 @@ public class SettingsManager : MonoBehaviour
 
     private void FindAndSetupVolume()
     {
-        globalVolume = FindObjectOfType<Volume>();
+        globalVolume = FindFirstObjectByType<Volume>();
         if (globalVolume != null && globalVolume.profile != null)
         {
             // Try to get ColorAdjustments

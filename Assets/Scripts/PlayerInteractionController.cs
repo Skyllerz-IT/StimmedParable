@@ -26,6 +26,6 @@ public class PlayerInteractionController : MonoBehaviour
 
     public void Interact()
     {
-        if (currentInteractable) currentInteractable.OnInteraction();
+        if (currentInteractable) currentInteractable.Interact();
     }
 }
