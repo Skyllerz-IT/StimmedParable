@@ -7,6 +7,8 @@ public class InteractiveAnomaly : MonoBehaviour
     [SerializeField] protected KeyCode interactKey = KeyCode.E;
     [SerializeField] private SpriteRenderer interactionPrompt;  // Changed to SpriteRenderer
     
+    [SerializeField] private GameObject target;
+    
     protected bool hasBeenInteracted = false;
     private static int anomaliesFound = 0;  // Static counter shared across all anomalies
     private static int totalAnomalies = 0;  // Total number of anomaly objects in the scene
@@ -52,7 +54,10 @@ public class InteractiveAnomaly : MonoBehaviour
     // Override this method in derived classes to add custom behavior
     protected virtual void OnAnomalyInteracted()
     {
-        // Base implementation does nothing
+        if (target != null)
+        {
+            target.SetActive(false);
+        }
     }
     
     // Public method to get the current anomaly count
