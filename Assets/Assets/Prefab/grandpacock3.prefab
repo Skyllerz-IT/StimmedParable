@@ -121,7 +121,8 @@ GameObject:
   - component: {fileID: 7975593289308220312}
   - component: {fileID: 420439467847924412}
   - component: {fileID: 5889806825811446077}
-  m_Layer: 0
+  - component: {fileID: 2223343347505219909}
+  m_Layer: 3
   m_Name: clock frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,6 +223,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -46979981765926204, guid: 1dd0c267f76834c2bb6d90fa27fc8284, type: 3}
+--- !u!114 &2223343347505219909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458805339349288885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95c2ab338cee4c7490b21d126bc89d2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3626508300871280175
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,7 +45,7 @@ public class Keypad : MonoBehaviour
             textOBJ.text = "Correct";
             keypadOBJ.SetActive(false);
             hud.SetActive(true);
-            Destroy(keypadOBJ);
+            Destroy(keypadOBJ, 1.5f);
         }
         else
         {
