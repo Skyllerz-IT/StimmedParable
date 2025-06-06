@@ -15,6 +15,8 @@ public class InteractiveAnomaly : MonoBehaviour
     private Camera mainCamera;
     public AnomalyMessageUI anomalyMessageUI; // Assign in Inspector
     
+    [SerializeField] private ParticleSystem interactParticles;
+    
     private void Start()
     {
         totalAnomalies++;  // Increment total when an anomaly object is created
@@ -25,6 +27,9 @@ public class InteractiveAnomaly : MonoBehaviour
         {
             interactionPrompt.enabled = false;
         }
+
+        if (interactParticles != null)
+            interactParticles.gameObject.SetActive(false); // Deactivate at start
     }
     
     // Interaction is now triggered externally (e.g., by a raycast/crosshair script)
@@ -42,6 +47,12 @@ public class InteractiveAnomaly : MonoBehaviour
             if (interactionPrompt != null)
                 interactionPrompt.enabled = false;
             
+            if (interactParticles != null)
+            {
+                interactParticles.gameObject.SetActive(true);
+                interactParticles.Play();
+            }
+            
             OnAnomalyInteracted();
         }
         else
@@ -58,6 +69,9 @@ public class InteractiveAnomaly : MonoBehaviour
         {
             target.SetActive(false);
         }
+        
+        if (interactParticles != null)
+            interactParticles.Play();
     }
     
     // Public method to get the current anomaly count
