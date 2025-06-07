@@ -7,8 +7,8 @@ public class SettingsManager : MonoBehaviour
 {
     public static SettingsManager Instance { get; private set; }
 
-    public float Sensitivity = 10f;
-    public float Brightness = 1f;
+    public float Sensitivity = 5f;
+    public float Brightness = 0f;
     public float AudioVolume = 1f;
 
     private Volume globalVolume;
@@ -31,8 +31,8 @@ public class SettingsManager : MonoBehaviour
     {
         // Reload settings
         Sensitivity = PlayerPrefs.GetFloat("Sensitivity", 10f);
-        Brightness = PlayerPrefs.GetFloat("Brightness", 1f);
         AudioVolume = PlayerPrefs.GetFloat("AudioVolume", 1f);
+        Brightness = PlayerPrefs.GetFloat("Brightness", 1f);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
