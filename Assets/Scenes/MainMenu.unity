@@ -1084,7 +1084,6 @@ GameObject:
   - component: {fileID: 708338093}
   - component: {fileID: 708338092}
   - component: {fileID: 708338094}
-  - component: {fileID: 708338095}
   m_Layer: 5
   m_Name: SettingsPanel
   m_TagString: Untagged
@@ -1169,21 +1168,6 @@ MonoBehaviour:
   sensitivitySlider: {fileID: 1106160947}
   brightnessSlider: {fileID: 736812319}
   audioSlider: {fileID: 1751932980}
---- !u!114 &708338095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 708338090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fdeec3bcf5084cf78ee59ebddb521f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensitivitySlider: {fileID: 1106160947}
-  brightnessSlider: {fileID: 736812319}
-  audioSlider: {fileID: 1751932980}
 --- !u!1 &736812317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,8 +1178,9 @@ GameObject:
   m_Component:
   - component: {fileID: 736812318}
   - component: {fileID: 736812319}
+  - component: {fileID: 736812320}
   m_Layer: 5
-  m_Name: Brightness
+  m_Name: brightnessSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1274,19 +1259,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1480833905}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: OnBrightnessChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &736812320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736812317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd673ab3152d7488a820152b9a2065bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &750118575
 GameObject:
   m_ObjectHideFlags: 0
@@ -2023,8 +2008,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1106160946}
   - component: {fileID: 1106160947}
+  - component: {fileID: 1106160948}
   m_Layer: 5
-  m_Name: Sensitivity
+  m_Name: sensitivitySlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2103,19 +2089,19 @@ MonoBehaviour:
   m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1480833905}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: OnSensitivityChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &1106160948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106160945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c14d49d0b1bcd4cdfb09131b34c66f54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1118330036
 GameObject:
   m_ObjectHideFlags: 0
@@ -2447,8 +2433,9 @@ GameObject:
   - component: {fileID: 1491465886}
   - component: {fileID: 1491465885}
   - component: {fileID: 1491465884}
+  - component: {fileID: 1491465887}
   m_Layer: 5
-  m_Name: Load Game
+  m_Name: loadGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2555,6 +2542,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491465882}
   m_CullTransparentMesh: 1
+--- !u!114 &1491465887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491465882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75db389d069444e689fd07872abb81a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1499943994
 GameObject:
   m_ObjectHideFlags: 0
@@ -3169,8 +3168,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1751932979}
   - component: {fileID: 1751932980}
+  - component: {fileID: 1751932981}
   m_Layer: 5
-  m_Name: Audio
+  m_Name: audioSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3249,19 +3249,19 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1480833905}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: OnAudioChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &1751932981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751932978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a047535a33af438e9a109c806452373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1948630275
 GameObject:
   m_ObjectHideFlags: 0
@@ -3337,6 +3337,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948630275}
   m_CullTransparentMesh: 1
+--- !u!1 &2038900616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2038900618}
+  - component: {fileID: 2038900617}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2038900617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038900616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb25f959e3d84aa4907d9b1f1fcba92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadGameButton: {fileID: 0}
+  quitButton: {fileID: 0}
+  audioSlider: {fileID: 0}
+  brightnessSlider: {fileID: 0}
+  sensitivitySlider: {fileID: 0}
+--- !u!4 &2038900618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038900616}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1187.4783, y: 563.0399, z: -1.9151833}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3348,3 +3397,4 @@ SceneRoots:
   - {fileID: 750118577}
   - {fileID: 939997336}
   - {fileID: 1480833906}
+  - {fileID: 2038900618}

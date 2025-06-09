@@ -104,12 +104,13 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    private void SetBrightness(float value)
+    public void SetBrightness(float value)
     {
+        Brightness = value;
+        // Apply to your brightness system here
         if (colorAdjustments != null)
         {
             colorAdjustments.postExposure.overrideState = true;
-            // Map your slider value (e.g., 1-2) to a reasonable exposure range, e.g., -2 to 2
             colorAdjustments.postExposure.value = Mathf.Lerp(-2f, 2f, (value - 1f) / (2f - 1f));
         }
     }
@@ -123,5 +124,17 @@ public class SettingsManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         StartCoroutine(FindVolumeWhenReady());
+    }
+
+    public void SetAudioVolume(float value)
+    {
+        AudioVolume = value;
+        // Apply to your audio system here
+    }
+
+    public void SetSensitivity(float value)
+    {
+        Sensitivity = value;
+        // Apply to your input system here
     }
 }
