@@ -1,8 +1,10 @@
+using UnityEngine;
+
 namespace DefaultNamespace
 {
     public interface IInteractable
     {
-        public string InteractMessage { get; }
-        public void Interact(InteractionController interactionController);
+        string InteractMessage { get; }
+        void Interact(InteractionController interactionController);
     }
 }

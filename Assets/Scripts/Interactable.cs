@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
-    public void OnInteraction()
-    {
-        Debug.Log("Interacting...");
-    }
+    public abstract string InteractMessage { get; }
+    public abstract void Interact();
 }

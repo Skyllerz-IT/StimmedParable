@@ -41,7 +41,7 @@ public class MenuManager : MonoBehaviour
             fadePanel.color = new Color(0, 0, 0, 1);
         }
         // Load the game scene
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     IEnumerator FadeOut()
@@ -50,11 +50,15 @@ public class MenuManager : MonoBehaviour
         while (t < fadeDuration)
         {
             t += Time.deltaTime;
-            fadePanel.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, t / fadeDuration));
+            if (fadePanel != null)
+                fadePanel.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, t / fadeDuration));
             yield return null;
         }
-        fadePanel.color = new Color(0, 0, 0, 0);
-        fadePanel.gameObject.SetActive(false);
+        if (fadePanel != null)
+        {
+            fadePanel.color = new Color(0, 0, 0, 0);
+            fadePanel.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame

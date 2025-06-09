@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraLook : MonoBehaviour
 {
@@ -13,11 +14,20 @@ public class CameraLook : MonoBehaviour
     
     void Start()
     {
-        
+        if (SettingsManager.Instance != null)
+            Sensitivity = SettingsManager.Instance.Sensitivity;
+        else if (PlayerPrefs.HasKey("Sensitivity"))
+            Sensitivity = PlayerPrefs.GetFloat("Sensitivity");
+        else
+            Sensitivity = 5f; // default
     }
 
     void Update()
     {
+        // Always get the latest value from SettingsManager if available
+        if (SettingsManager.Instance != null)
+            Sensitivity = SettingsManager.Instance.Sensitivity;
+
         XMove = LockAxis.x * Sensitivity * Time.deltaTime;
         YMove = LockAxis.y * Sensitivity * Time.deltaTime;
 
