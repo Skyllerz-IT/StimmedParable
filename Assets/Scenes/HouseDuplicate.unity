@@ -5230,11 +5230,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5117252069168137863, guid: 4bb55b9aec25a45759f868c0f76802c7, type: 3}
---- !u!4 &453545369 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6461788674224263996, guid: 9124bd14a010641829327db0e9a6b5b9, type: 3}
-  m_PrefabInstance: {fileID: 1847518357}
-  m_PrefabAsset: {fileID: 0}
 --- !u!64 &463203774
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13319,8 +13314,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: You already found this anomaly
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 936f40834481a47da93d36f9561c9fe1, type: 2}
-  m_sharedMaterial: {fileID: -8871553529465507186, guid: 936f40834481a47da93d36f9561c9fe1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13456,8 +13451,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: You found an anomaly...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 936f40834481a47da93d36f9561c9fe1, type: 2}
-  m_sharedMaterial: {fileID: -8871553529465507186, guid: 936f40834481a47da93d36f9561c9fe1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -20618,7 +20613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d8ed1e04f52457487e6167470406b15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupHolder: {fileID: 453545369}
+  pickupHolder: {fileID: 0}
 --- !u!64 &1987334060
 MeshCollider:
   m_ObjectHideFlags: 0
