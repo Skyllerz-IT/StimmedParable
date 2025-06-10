@@ -7,6 +7,9 @@ public class PhoneInteraction : MonoBehaviour, IInteractable
 {
     [Header("UI")]
     public TextMeshProUGUI interactPrompt;
+    public TextMeshProUGUI objectiveText;
+    [SerializeField] private float fadeInDuration = 1f;
+
     [Header("Audio")]
     public AudioClip ringClip;
     public AudioClip pickupClip;
@@ -22,10 +25,18 @@ public class PhoneInteraction : MonoBehaviour, IInteractable
 
     public string InteractMessage => hasInteracted ? "" : "Answer Phone";
 
-    void Start()
+    private void Start()
     {
         if (interactPrompt != null)
             interactPrompt.gameObject.SetActive(false);
+
+        if (objectiveText != null)
+        {
+            // Hide the text at start
+            Color textColor = objectiveText.color;
+            textColor.a = 0f;
+            objectiveText.color = textColor;
+        }
 
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
@@ -44,6 +55,29 @@ public class PhoneInteraction : MonoBehaviour, IInteractable
         audioSource.loop = true;
         if (!audioSource.isPlaying)
             audioSource.Play();
+        
+        // Start fading in the objective text
+        if (objectiveText != null)
+            StartCoroutine(FadeInText());
+    }
+
+    private IEnumerator FadeInText()
+    {
+        float elapsedTime = 0f;
+        Color textColor = objectiveText.color;
+
+        while (elapsedTime < fadeInDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeInDuration);
+            textColor.a = alpha;
+            objectiveText.color = textColor;
+            yield return null;
+        }
+
+        // Ensure we end up at full opacity
+        textColor.a = 1f;
+        objectiveText.color = textColor;
     }
 
     public void Interact(InteractionController interactionController)
@@ -71,4 +105,4 @@ public class PhoneInteraction : MonoBehaviour, IInteractable
         audioSource.loop = false;
         audioSource.Play();
     }
-}
+} 
