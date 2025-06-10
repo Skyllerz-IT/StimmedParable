@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
 
     [Header("Post-Processing")]
     public Volume postProcessVolume; // Assign in Inspector
-    private ColorAdjustments colorAdjustments;
+    private Vignette vignette; // Usiamo l'effetto Vignette
     private float effectLerp = 0f;
     private bool effectFullyWhite = false;
 
@@ -63,14 +63,14 @@ public class EnemyController : MonoBehaviour
         TeleportToRandomSpawnPoint();
         teleportRoutine = StartCoroutine(TeleportLoop());
 
-        // Get ColorAdjustments from the volume profile
-        if (postProcessVolume != null && postProcessVolume.profile.TryGet(out colorAdjustments))
+        // Get Vignette from the volume profile
+        if (postProcessVolume != null && postProcessVolume.profile.TryGet(out vignette))
         {
-            colorAdjustments.active = true;
+            vignette.active = true;
         }
         else
         {
-            Debug.LogWarning("EnemyController: No ColorAdjustments override found in the assigned Volume profile.");
+            Debug.LogWarning("EnemyController: No Vignette override found in the assigned Volume profile.");
         }
 
         gameTimer = FindFirstObjectByType<GameTimer>();
@@ -79,6 +79,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         if (playerCamera == null || playerMove == null) return;
+
         // Check if enemy is on screen
         Vector3 viewportPos = playerCamera.WorldToViewportPoint(transform.position);
         bool onScreen = viewportPos.z > 0 && viewportPos.x > 0 && viewportPos.x < 1 && viewportPos.y > 0 && viewportPos.y < 1;
@@ -98,6 +99,7 @@ public class EnemyController : MonoBehaviour
             }
         }
         playerLookingAtEnemy = visible;
+
         if (visible)
         {
             stareTimer += Time.deltaTime;
@@ -106,7 +108,7 @@ public class EnemyController : MonoBehaviour
                 if (stareTimer >= stareTimeToDie)
                 {
                     effectFullyWhite = true;
-                    //call death logic here
+                    // Call death logic here
                     Debug.Log("Player has stared at the enemy long enough to die.");
                 }
             }
@@ -118,7 +120,7 @@ public class EnemyController : MonoBehaviour
 
         // --- Post-processing effect logic with flicker ---
         float targetLerp = playerLookingAtEnemy ? Mathf.Clamp01(stareTimer / stareTimeToDie) : 0f;
-        effectLerp = Mathf.MoveTowards(effectLerp, targetLerp, Time.deltaTime / 0.5f); // 0.5s smooth return
+        effectLerp = Mathf.MoveTowards(effectLerp, targetLerp, Time.deltaTime / 0.5f); // Smooth return
 
         float flicker = 0f;
         if (playerLookingAtEnemy)
@@ -126,11 +128,12 @@ public class EnemyController : MonoBehaviour
             flicker = Mathf.Sin(Time.time * flickerSpeed) * flickerAmount * effectLerp;
         }
 
-        if (colorAdjustments != null)
+        if (vignette != null)
         {
-            colorAdjustments.postExposure.value = Mathf.Lerp(0f, 3f, effectLerp) + flicker;
-            colorAdjustments.saturation.value = Mathf.Lerp(0f, -100f, effectLerp) + flicker * 10f;
+            float baseIntensity = Mathf.Lerp(0f, 1f, effectLerp);
+            vignette.intensity.value = Mathf.Clamp01(baseIntensity + flicker);
         }
+
         if (!playerLookingAtEnemy)
         {
             effectFullyWhite = false;
@@ -142,7 +145,6 @@ public class EnemyController : MonoBehaviour
         while (true)
         {
             float progress = gameTimer != null ? gameTimer.GetProgress() : 0f;
-            // As time progresses, min/max wait times decrease by up to 50%
             float min = Mathf.Lerp(minWaitTime, minWaitTime * 0.5f, progress);
             float max = Mathf.Lerp(maxWaitTime, maxWaitTime * 0.5f, progress);
 
@@ -160,7 +162,6 @@ public class EnemyController : MonoBehaviour
     {
         if (spawnPoints.Length == 0) return;
         int newIndex = currentSpawnIndex;
-        // Ensure a different spawn point is chosen
         while (spawnPoints.Length > 1 && newIndex == currentSpawnIndex)
         {
             newIndex = Random.Range(0, spawnPoints.Length);
