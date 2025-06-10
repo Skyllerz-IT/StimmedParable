@@ -22,7 +22,7 @@ public class MenuManager : MonoBehaviour
 
     public void OnNewGamePressed()
     {
-        StartCoroutine(FadeAndLoadScene("Night 2"));
+        StartCoroutine(FadeAndLoadScene("AbandonedHouse"));
     }
 
     IEnumerator FadeAndLoadScene(string sceneName)

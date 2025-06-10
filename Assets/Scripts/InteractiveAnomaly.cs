@@ -9,6 +9,9 @@ public class InteractiveAnomaly : MonoBehaviour
     [SerializeField] private SpriteRenderer interactionPrompt;  // Changed to SpriteRenderer
     
     [SerializeField] private GameObject target;
+    [SerializeField] private Component component;
+    
+    [SerializeField] private RandomBlink blinkingLight;
     
     [SerializeField] protected bool hasBeenInteracted = false;  // Made serializable
     private static int totalAnomalies = 0;  // Total number of anomaly objects in the scene
@@ -64,6 +67,11 @@ public class InteractiveAnomaly : MonoBehaviour
             {
                 interactParticles.gameObject.SetActive(true);
                 interactParticles.Play();
+            }
+
+            if (component != null)
+            {
+                Destroy(component);
             }
             
             OnAnomalyInteracted();

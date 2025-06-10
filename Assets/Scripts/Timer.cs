@@ -9,6 +9,11 @@ public class GameTimer : MonoBehaviour
 
     public GameObject gameOverUI;
     public GameObject HUD;
+    
+    public float GetProgress()
+    {
+        return 1f - Mathf.Clamp01(timeRemaining / totalTime);
+    }
 
     void Start()
     {
