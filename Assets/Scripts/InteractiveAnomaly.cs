@@ -6,18 +6,19 @@ public class InteractiveAnomaly : MonoBehaviour
     [Header("Interaction Settings")]
     [SerializeField] protected float interactionDistance = 2f;
     [SerializeField] protected KeyCode interactKey = KeyCode.E;
-    [SerializeField] private SpriteRenderer interactionPrompt;  // Changed to SpriteRenderer
-    
+    [SerializeField] private SpriteRenderer interactionPrompt;
+
     [SerializeField] private GameObject target;
     [SerializeField] private Component component;
-    
+
     [SerializeField] private RandomBlink blinkingLight;
-    
-    [SerializeField] protected bool hasBeenInteracted = false;  // Made serializable
-    private static int totalAnomalies = 0;  // Total number of anomaly objects in the scene
+
+    [SerializeField] protected bool hasBeenInteracted = false;
+    private static int totalAnomalies = 0;
     private Camera mainCamera;
-    public AnomalyMessageUI anomalyMessageUI; // Assign in Inspector
-    
+    public AnomalyMessageUI anomalyMessageUI;
+    public AnomalyUIManager anomalyUIManager; // Add this line
+
     [SerializeField] private ParticleSystem interactParticles;
 
     [Header("Anomaly Settings")]
@@ -30,27 +31,35 @@ public class InteractiveAnomaly : MonoBehaviour
 
     private void Start()
     {
-        // Only increment totalAnomalies once per scene load
-        if (!staticsInitialized)
+        /*if (!staticsInitialized)
         {
             ResetStatics();
             staticsInitialized = true;
         }
-        totalAnomalies++;
-
+        totalAnomalies++; this is moved to Awake to ensure it counts all instances correctly
+*/
         mainCamera = Camera.main;
-        
-        // Hide interaction prompt at start
+
         if (interactionPrompt != null)
         {
             interactionPrompt.enabled = false;
         }
 
         if (interactParticles != null)
-            interactParticles.gameObject.SetActive(false); // Deactivate at start
+            interactParticles.gameObject.SetActive(false);
     }
-    
-    // Interaction is now triggered externally (e.g., by a raycast/crosshair script)
+
+    private void Awake()
+    {
+        if (!staticsInitialized)
+        {
+            ResetStatics();
+            staticsInitialized = true;
+        }
+
+        totalAnomalies++;
+    }
+
     public virtual void Interact()
     {
         if (!hasBeenInteracted)
@@ -58,13 +67,16 @@ public class InteractiveAnomaly : MonoBehaviour
             hasBeenInteracted = true;
             anomalyFoundDict[anomalyID] = true;
             Debug.Log($"Anomaly {anomalyID} found! Progress: {GetAnomalyCount()}/{totalAnomalies} anomalies checked. {totalAnomalies - GetAnomalyCount()} remaining.");
-            
+
             if (anomalyMessageUI != null)
                 anomalyMessageUI.ShowMessage("You found an anomaly");
-            
+
+            if (anomalyUIManager != null)
+                anomalyUIManager.UpdateAnomalyProgress(); // Add this line
+
             if (interactionPrompt != null)
                 interactionPrompt.enabled = false;
-            
+
             if (interactParticles != null)
             {
                 interactParticles.gameObject.SetActive(true);
@@ -75,7 +87,7 @@ public class InteractiveAnomaly : MonoBehaviour
             {
                 Destroy(component);
             }
-            
+
             OnAnomalyInteracted();
         }
         else
@@ -84,20 +96,18 @@ public class InteractiveAnomaly : MonoBehaviour
                 anomalyMessageUI.ShowAlreadyFoundMessage();
         }
     }
-    
-    // Override this method in derived classes to add custom behavior
+
     protected virtual void OnAnomalyInteracted()
     {
         if (target != null)
             target.SetActive(false);
         if (solvedObject != null)
             solvedObject.SetActive(true);
-        
+
         if (interactParticles != null)
             interactParticles.Play();
     }
-    
-    // Public method to get the current anomaly count
+
     public static int GetAnomalyCount()
     {
         int count = 0;
@@ -107,27 +117,23 @@ public class InteractiveAnomaly : MonoBehaviour
         }
         return count;
     }
-    
-    // Public method to get the total number of anomalies
+
     public static int GetTotalAnomalies()
     {
         return totalAnomalies;
     }
-    
-    // Optional: Visualize interaction range in editor
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, interactionDistance);
     }
 
-    // New method to set anomaly counts from save data
     public static void SetAnomalyCounts(int found, int total)
     {
         totalAnomalies = total;
     }
-    
-    // New method to set individual anomaly state
+
     public void SetInteractedState(bool state)
     {
         hasBeenInteracted = state;
@@ -135,16 +141,18 @@ public class InteractiveAnomaly : MonoBehaviour
         {
             if (interactionPrompt != null)
                 interactionPrompt.enabled = false;
-            
+
             if (interactParticles != null)
             {
                 interactParticles.gameObject.SetActive(true);
                 interactParticles.Play();
             }
-            
+
             if (target != null)
                 target.SetActive(false);
         }
+        if (anomalyUIManager != null)
+            anomalyUIManager.UpdateAnomalyProgress(); // Add this line
     }
 
     public static List<int> GetFoundAnomalyIDs()
@@ -183,4 +191,4 @@ public class InteractiveAnomaly : MonoBehaviour
             anomaly.SetInteractedState(false);
         }
     }
-} 
+}
