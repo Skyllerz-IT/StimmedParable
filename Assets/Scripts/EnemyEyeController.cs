@@ -52,6 +52,17 @@ public class EnemyEyeController : MonoBehaviour
     private float flickerSpeed = 20f;
     private float flickerAmount = 0.3f;
 
+    void OnDrawGizmos()
+    {
+        if (spawnPoints == null) return;
+        Gizmos.color = Color.red;
+        foreach (var point in spawnPoints)
+        {
+            if (point != null)
+                Gizmos.DrawSphere(point.position, 0.3f);
+        }
+    }
+
     void Awake()
     {
         playerCamera = Camera.main;
