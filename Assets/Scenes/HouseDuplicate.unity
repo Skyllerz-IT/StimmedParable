@@ -8633,11 +8633,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 767f2191b347749e9965425dee4a117a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 300
-  gameOverUI: {fileID: 126099100}
-  HUD: {fileID: 1822449792}
+  totalTime: 10
+  gameOverUI: {fileID: 771751039}
+  HUD: {fileID: 771751042}
   timerText: {fileID: 610590883}
-  animator: {fileID: 0}
 --- !u!4 &634613380
 Transform:
   m_ObjectHideFlags: 0
@@ -15118,6 +15117,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ToggleCrouch
       objectReference: {fileID: 0}
+    - target: {fileID: 6948551635479487197, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948551635479487197, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948551635479487197, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11500000, guid: 51ef78222791b463bac06185c5f97d41, type: 3}
+    - target: {fileID: 6948551635479487197, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948551635479487197, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuitToMainMenuButton, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8514190949854816088, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
@@ -15144,7 +15163,52 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 905095172552929323, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
       insertIndex: -1
       addedObject: {fileID: 301769479}
+    - targetCorrespondingSourceObject: {fileID: 5869948915478437856, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 771751041}
+    - targetCorrespondingSourceObject: {fileID: 5869948915478437856, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 771751040}
   m_SourcePrefab: {fileID: 100100000, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
+--- !u!1 &771751038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5869948915478437856, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
+  m_PrefabInstance: {fileID: 771751037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &771751039 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1861102178636893371, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
+  m_PrefabInstance: {fileID: 771751037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &771751040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771751038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62eb1d19e6037481db489570c2ee51fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &771751041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771751038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51ef78222791b463bac06185c5f97d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &771751042 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 607984638193532171, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
+  m_PrefabInstance: {fileID: 771751037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &772430001
 MeshCollider:
   m_ObjectHideFlags: 0
