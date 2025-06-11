@@ -22,6 +22,8 @@ public class InteractiveAnomaly : MonoBehaviour
 
     [Header("Anomaly Settings")]
     public int anomalyID;
+    [Tooltip("GameObject to show when the anomaly is solved (optional)")]
+    public GameObject solvedObject;
 
     private static Dictionary<int, bool> anomalyFoundDict = new Dictionary<int, bool>();
     private static bool staticsInitialized = false;
@@ -87,9 +89,9 @@ public class InteractiveAnomaly : MonoBehaviour
     protected virtual void OnAnomalyInteracted()
     {
         if (target != null)
-        {
             target.SetActive(false);
-        }
+        if (solvedObject != null)
+            solvedObject.SetActive(true);
         
         if (interactParticles != null)
             interactParticles.Play();
