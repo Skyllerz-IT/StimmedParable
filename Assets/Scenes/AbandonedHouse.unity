@@ -2487,6 +2487,20 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -393
       objectReference: {fileID: 0}
+    - target: {fileID: 3360507645599074052, guid: efc4216c265244689b13c06e9055df2a, type: 3}
+      propertyPath: m_text
+      value: '07:00PM
+
+        I''m hearing strange noises... Better if I''ll go
+        check upstairs'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858222393741073661, guid: efc4216c265244689b13c06e9055df2a, type: 3}
+      propertyPath: m_text
+      value: '09:00PM
+
+        I''m sure I already did everything, but I have the
+        sensation that not everything is done. I should check the ceiling'
+      objectReference: {fileID: 0}
     - target: {fileID: 4839927618374258200, guid: efc4216c265244689b13c06e9055df2a, type: 3}
       propertyPath: m_Name
       value: ArrowPageRight
@@ -2502,6 +2516,13 @@ PrefabInstance:
     - target: {fileID: 5022534427795081617, guid: efc4216c265244689b13c06e9055df2a, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293731299950525890, guid: efc4216c265244689b13c06e9055df2a, type: 3}
+      propertyPath: m_text
+      value: '08:00PM
+
+        That''s strange... I was in the other room but when
+        i opened my eyes i was on the sofa...'
       objectReference: {fileID: 0}
     - target: {fileID: 5633783735937786488, guid: efc4216c265244689b13c06e9055df2a, type: 3}
       propertyPath: m_Pivot.x
@@ -2602,6 +2623,10 @@ PrefabInstance:
     - target: {fileID: 5749432076648971783, guid: efc4216c265244689b13c06e9055df2a, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193698074556955044, guid: efc4216c265244689b13c06e9055df2a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 770
       objectReference: {fileID: 0}
     - target: {fileID: 6864987580261226856, guid: efc4216c265244689b13c06e9055df2a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -10146,6 +10171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8692639098102859380, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4770028380649847469, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
     m_RemovedGameObjects: []
@@ -13610,7 +13639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1123462171
 RectTransform:
   m_ObjectHideFlags: 0
