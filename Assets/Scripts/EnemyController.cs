@@ -13,8 +13,8 @@ public class EnemyController : MonoBehaviour
     public float maxWaitTime = 10f;
 
     [Header("Post-Processing")]
-    public Volume postProcessVolume; // Assign in Inspector
-    private Vignette vignette; // Usiamo l'effetto Vignette
+    public Volume enemyVolume; // Separate volume for enemy effects
+    private Vignette vignette;
     private float effectLerp = 0f;
     private bool effectFullyWhite = false;
 
@@ -63,14 +63,14 @@ public class EnemyController : MonoBehaviour
         TeleportToRandomSpawnPoint();
         teleportRoutine = StartCoroutine(TeleportLoop());
 
-        // Get Vignette from the volume profile
-        if (postProcessVolume != null && postProcessVolume.profile.TryGet(out vignette))
+        // Get Vignette from the enemy volume profile
+        if (enemyVolume != null && enemyVolume.profile.TryGet(out vignette))
         {
             vignette.active = true;
         }
         else
         {
-            Debug.LogWarning("EnemyController: No Vignette override found in the assigned Volume profile.");
+            Debug.LogWarning("EnemyController: No Vignette override found in the assigned enemy Volume profile.");
         }
 
         gameTimer = FindFirstObjectByType<GameTimer>();
