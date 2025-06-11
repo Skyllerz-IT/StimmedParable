@@ -8637,6 +8637,7 @@ MonoBehaviour:
   gameOverUI: {fileID: 126099100}
   HUD: {fileID: 1822449792}
   timerText: {fileID: 610590883}
+  animator: {fileID: 0}
 --- !u!4 &634613380
 Transform:
   m_ObjectHideFlags: 0
