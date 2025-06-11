@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameTimer : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameTimer : MonoBehaviour
 
     public GameObject gameOverUI;
     public GameObject HUD;
+    public TextMeshProUGUI timerText;
     
     public float GetProgress()
     {
@@ -41,6 +43,7 @@ public class GameTimer : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(timeRemaining / 60);
         int seconds = Mathf.FloorToInt(timeRemaining % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     void EndGame()
