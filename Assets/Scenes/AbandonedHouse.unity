@@ -2505,6 +2505,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArrowPageRight
       objectReference: {fileID: 0}
+    - target: {fileID: 4839927618374258200, guid: efc4216c265244689b13c06e9055df2a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5015285084463210036, guid: efc4216c265244689b13c06e9055df2a, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -559
@@ -4596,11 +4600,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6480503795815177303, guid: ae4e1bed1d2c64bea8cceefeff47c28b, type: 3}
       propertyPath: maxDelay
-      value: 20
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6480503795815177303, guid: ae4e1bed1d2c64bea8cceefeff47c28b, type: 3}
       propertyPath: minDelay
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7518134093419834919, guid: ae4e1bed1d2c64bea8cceefeff47c28b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28780,7 +28784,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884089506}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d81439837f0b44799be464ee48950ee1, type: 3}
   m_Name: 
