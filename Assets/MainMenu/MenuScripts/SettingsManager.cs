@@ -11,8 +11,9 @@ public class SettingsManager : MonoBehaviour
     public float Brightness = 0f;
     public float AudioVolume = 1f;
 
-    private Volume globalVolume;
-    private LiftGammaGain liftGammaGain;
+    [Header("Post Processing")]
+    public Volume globalVolume; // Assign this in the inspector to ensure we use the correct volume
+
     private ColorAdjustments colorAdjustments;
 
     void Awake()
@@ -35,6 +36,9 @@ public class SettingsManager : MonoBehaviour
         Brightness = PlayerPrefs.GetFloat("Brightness", 1f);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+        
+        // Setup volume immediately
+        SetupVolume();
     }
 
     void OnDisable()
@@ -42,33 +46,31 @@ public class SettingsManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private System.Collections.IEnumerator FindVolumeWhenReady()
+    private void SetupVolume()
     {
-        // Wait until the end of the frame to ensure all objects are initialized
-        yield return new WaitForEndOfFrame();
-
-        // Try to find the Volume in the current scene
-        FindAndSetupVolume();
-
-        // If not found, keep trying for a few frames (optional)
-        int tries = 0;
-        while (globalVolume == null && tries < 10)
+        // If not assigned in Inspector, try to find the Volume with the correct profile name
+        if (globalVolume == null)
         {
-            yield return new WaitForSeconds(0.1f);
-            FindAndSetupVolume();
-            tries++;
+            var allVolumes = Object.FindObjectsByType<Volume>(FindObjectsSortMode.None);
+            foreach (var vol in allVolumes)
+            {
+                if (vol.profile != null && vol.profile.name == "Global Volume Profile")
+                {
+                    globalVolume = vol;
+                    Debug.Log($"[SettingsManager] Assigned globalVolume: {globalVolume.gameObject.name} with profile '{vol.profile.name}'");
+                    break;
+                }
+            }
+            if (globalVolume == null)
+            {
+                Debug.LogWarning("[SettingsManager] No Volume with profile 'Global Volume Profile' found in scene!");
+            }
         }
-    }
-
-    private void FindAndSetupVolume()
-    {
-        globalVolume = FindFirstObjectByType<Volume>();
         if (globalVolume != null && globalVolume.profile != null)
         {
             // Try to get ColorAdjustments
             if (globalVolume.profile.TryGet<ColorAdjustments>(out colorAdjustments))
             {
-                Debug.Log("Found Volume and ColorAdjustments!");
                 SetBrightness(Brightness);
             }
             else
@@ -77,16 +79,18 @@ public class SettingsManager : MonoBehaviour
                 Debug.LogWarning("Could not find ColorAdjustments!");
             }
         }
+        else
+        {
+            Debug.LogWarning("Global Volume not assigned in SettingsManager!");
+        }
     }
 
     public void OnSensitivityChanged(float value)
     {
-        Debug.Log("OnSensitivityChanged CALLED with value: " + value);
         value = Mathf.Max(1f, value);
         Sensitivity = value;
         PlayerPrefs.SetFloat("Sensitivity", value);
         PlayerPrefs.Save();
-        Debug.Log("Sensitivity updated to: " + Sensitivity);
     }
 
     public void OnBrightnessChanged(float value)
@@ -107,23 +111,22 @@ public class SettingsManager : MonoBehaviour
     public void SetBrightness(float value)
     {
         Brightness = value;
-        // Apply to your brightness system here
         if (colorAdjustments != null)
         {
             colorAdjustments.postExposure.overrideState = true;
-            colorAdjustments.postExposure.value = Mathf.Lerp(-2f, 2f, (value - 1f) / (2f - 1f));
+            // Map the slider value (0-1) to postExposure range (-2 to 2)
+            colorAdjustments.postExposure.value = Mathf.Lerp(-2f, 2f, value);
+            Debug.Log($"Setting brightness to {value}, postExposure to {colorAdjustments.postExposure.value}");
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // No slider references in SettingsManager, so no need to update Debug.Log
+        else
+        {
+            Debug.LogWarning("Cannot set brightness - ColorAdjustments not found!");
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        StartCoroutine(FindVolumeWhenReady());
+        SetupVolume();
     }
 
     public void SetAudioVolume(float value)
