@@ -185,7 +185,7 @@ public class InteractiveAnomaly : MonoBehaviour
         anomalyFoundDict.Clear();
         totalAnomalies = 0;
         staticsInitialized = false;
-        foreach (var anomaly in GameObject.FindObjectsOfType<InteractiveAnomaly>())
+        foreach (var anomaly in GameObject.FindObjectsByType<InteractiveAnomaly>(FindObjectsSortMode.None))
         {
             anomaly.hasBeenInteracted = false;
             anomaly.SetInteractedState(false);

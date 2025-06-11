@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
         // InteractiveAnomaly.SetAnomalyCounts(saveData.anomaliesFound, saveData.totalAnomalies);
 
         // Restore anomaly states
-        foreach (var anomaly in FindObjectsOfType<InteractiveAnomaly>())
+        foreach (var anomaly in FindObjectsByType<InteractiveAnomaly>(FindObjectsSortMode.None))
         {
             anomaly.RestoreStateFromDict();
         }

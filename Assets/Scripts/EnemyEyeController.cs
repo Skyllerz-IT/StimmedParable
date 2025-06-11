@@ -39,7 +39,7 @@ public class EnemyEyeController : MonoBehaviour
     private bool playerLookingAtEnemy = false;
     private Coroutine teleportRoutine;
     private int currentSpawnIndex = -1;
-    
+
     [Header("Eyeball")]
     public Transform eyeball; // Assign your eyeball child here
 
@@ -80,7 +80,7 @@ public class EnemyEyeController : MonoBehaviour
             enabled = false;
             return;
         }
-        TeleportToNearestSpawnPoint();
+        TeleportSmartly();
         teleportRoutine = StartCoroutine(TeleportLoop());
 
         if (enemyVolume != null && enemyVolume.profile.TryGet(out vignette))
@@ -100,7 +100,7 @@ public class EnemyEyeController : MonoBehaviour
     void Update()
     {
         if (playerCamera == null) return;
-        
+
         // Make eyeball look at camera
         if (eyeball != null)
             eyeball.LookAt(playerCamera.transform.position);
@@ -158,7 +158,7 @@ public class EnemyEyeController : MonoBehaviour
         if (playerLookingAtEnemy)
             targetLerp = Mathf.Clamp01(stareTimer / stareTimeToDie);
         else if (isChasing)
-            targetLerp = 0.4f; // Less intense during chase
+            targetLerp = 0.1f; // Less intense during chase
         effectLerp = Mathf.MoveTowards(effectLerp, targetLerp, Time.deltaTime / 0.5f);
 
         float flicker = (playerLookingAtEnemy || isChasing) ? Mathf.Sin(Time.time * flickerSpeed) * flickerAmount * effectLerp : 0f;
@@ -177,7 +177,7 @@ public class EnemyEyeController : MonoBehaviour
         // Move enemy far away during cooldown
         transform.position = Vector3.one * 9999f;
         yield return new WaitForSeconds(respawnCooldown);
-        TeleportToNearestSpawnPoint();
+        TeleportSmartly();
         isCooldown = false;
     }
 
@@ -196,7 +196,7 @@ public class EnemyEyeController : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
 
             if (!playerLookingAtEnemy && !isChasing && !isCooldown)
-                TeleportToNearestSpawnPoint();
+                TeleportSmartly();
         }
     }
 
@@ -208,46 +208,72 @@ public class EnemyEyeController : MonoBehaviour
         transform.position += toPlayer * step;
     }
 
-    void TeleportToNearestSpawnPoint()
+    // --- SMART TELEPORT LOGIC BELOW ---
+
+    void TeleportSmartly()
     {
         if (spawnPoints.Length == 0 || playerTransform == null) return;
 
-        float minDist = float.MaxValue;
-        int nearestIndex = 0;
+        // Gather spawn points not in line of sight
+        var validPoints = new System.Collections.Generic.List<int>();
         for (int i = 0; i < spawnPoints.Length; i++)
         {
-            float dist = Vector3.Distance(playerTransform.position, spawnPoints[i].position);
-            if (dist < minDist)
-            {
-                minDist = dist;
-                nearestIndex = i;
-            }
+            if (!IsVisibleToPlayer(spawnPoints[i].position))
+                validPoints.Add(i);
         }
-        currentSpawnIndex = nearestIndex;
+
+        // If all are visible, fallback to all points
+        if (validPoints.Count == 0)
+        {
+            for (int i = 0; i < spawnPoints.Length; i++)
+                validPoints.Add(i);
+        }
+
+        // Randomly choose between farthest or random
+        int chosenIndex;
+        if (Random.value < 0.5f)
+        {
+            // Farthest valid point
+            float maxDist = float.MinValue;
+            int farthest = validPoints[0];
+            foreach (int idx in validPoints)
+            {
+                float dist = Vector3.Distance(playerTransform.position, spawnPoints[idx].position);
+                if (dist > maxDist)
+                {
+                    maxDist = dist;
+                    farthest = idx;
+                }
+            }
+            chosenIndex = farthest;
+        }
+        else
+        {
+            // Random valid point
+            chosenIndex = validPoints[Random.Range(0, validPoints.Count)];
+        }
+
+        currentSpawnIndex = chosenIndex;
         Transform target = spawnPoints[currentSpawnIndex];
         transform.position = target.position;
         transform.rotation = target.rotation;
     }
 
-    void TeleportToFarthestSpawnPoint()
+    bool IsVisibleToPlayer(Vector3 point)
     {
-        if (spawnPoints.Length == 0 || playerTransform == null) return;
-
-        float maxDist = float.MinValue;
-        int farthestIndex = 0;
-        for (int i = 0; i < spawnPoints.Length; i++)
+        if (playerCamera == null) return false;
+        Vector3 dir = (point - playerCamera.transform.position).normalized;
+        float dist = Vector3.Distance(playerCamera.transform.position, point);
+        Ray ray = new Ray(playerCamera.transform.position, dir);
+        if (Physics.Raycast(ray, out RaycastHit hit, dist + 0.1f))
         {
-            float dist = Vector3.Distance(playerTransform.position, spawnPoints[i].position);
-            if (dist > maxDist)
-            {
-                maxDist = dist;
-                farthestIndex = i;
-            }
+            // If the ray hits something before the point, it's not visible
+            if ((hit.point - point).sqrMagnitude > 0.01f)
+                return false;
         }
-        currentSpawnIndex = farthestIndex;
-        Transform target = spawnPoints[currentSpawnIndex];
-        transform.position = target.position;
-        transform.rotation = target.rotation;
+        // Check if within camera view
+        Vector3 viewportPos = playerCamera.WorldToViewportPoint(point);
+        return viewportPos.z > 0 && viewportPos.x > 0 && viewportPos.x < 1 && viewportPos.y > 0 && viewportPos.y < 1;
     }
 
     bool IsPlayerLookingAtMe()
