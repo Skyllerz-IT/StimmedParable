@@ -9,9 +9,13 @@ public class PlayerMove : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundMask;
 
+    public float acceleration = 10f; // How quickly the player accelerates
+    public float inertia = 5f; // How quickly the player slows down when input is released
+
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
+    private Vector3 currentMoveVelocity = Vector3.zero; // For smooth movement
 
     void Start()
     {
@@ -39,8 +43,14 @@ public class PlayerMove : MonoBehaviour
             vertical = Input.GetKey(KeyCode.W) ? 1f : Input.GetKey(KeyCode.S) ? -1f : 0f;
         }
 
-        Vector3 move = transform.right * horizontal + transform.forward * vertical;
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        Vector3 inputDirection = (transform.right * horizontal + transform.forward * vertical).normalized;
+        Vector3 targetVelocity = inputDirection * moveSpeed;
+
+        // Apply acceleration and inertia
+        float lerpSpeed = (inputDirection.magnitude > 0.01f) ? acceleration : inertia;
+        currentMoveVelocity = Vector3.Lerp(currentMoveVelocity, targetVelocity, lerpSpeed * Time.deltaTime);
+
+        controller.Move(currentMoveVelocity * Time.deltaTime);
 
         // Gravity
         velocity.y -= gravity * Time.deltaTime;
