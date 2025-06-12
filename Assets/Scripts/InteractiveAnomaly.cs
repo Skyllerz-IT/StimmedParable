@@ -25,6 +25,8 @@ public class InteractiveAnomaly : MonoBehaviour
     public int anomalyID;
     [Tooltip("GameObject to show when the anomaly is solved (optional)")]
     public GameObject solvedObject;
+    [Tooltip("SpriteRenderer to disable when this anomaly is interacted with (optional)")]
+    public SpriteRenderer spriteToDisable;
 
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
@@ -57,10 +59,13 @@ public class InteractiveAnomaly : MonoBehaviour
                 anomalyMessageUI.ShowMessage("You found an anomaly");
 
             if (anomalyUIManager != null)
-                anomalyUIManager.UpdateAnomalyProgress(); // Add this line
+                anomalyUIManager.UpdateAnomalyProgress();
 
             if (interactionPrompt != null)
                 interactionPrompt.enabled = false;
+
+            if (spriteToDisable != null)
+                spriteToDisable.enabled = false;
 
             if (interactParticles != null)
             {
