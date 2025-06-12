@@ -31,46 +31,18 @@ public class InteractiveAnomaly : MonoBehaviour
     [SerializeField] private AudioClip clearSound;
 
     private static Dictionary<int, bool> anomalyFoundDict = new Dictionary<int, bool>();
-    private static bool staticsInitialized = false;
-
-    /*private void Awake()
-    {
-        // Reset statics if this is the first anomaly in the scene
-        if (FindObjectsByType<InteractiveAnomaly>(FindObjectsSortMode.None).Length == 1)
-        {
-            ResetStatics();
-        }
-    } */
 
     private void Start()
     {
-        /*if (!staticsInitialized)
-        {
-            ResetStatics();
-            staticsInitialized = true;
-        }
-        totalAnomalies++; this is moved to Awake to ensure it counts all instances correctly
-*/
+        InteractiveAnomaly.CountAllAnomaliesInScene();
         mainCamera = Camera.main;
-
+        // Hide interaction prompt at start
         if (interactionPrompt != null)
         {
             interactionPrompt.enabled = false;
         }
-
         if (interactParticles != null)
-            interactParticles.gameObject.SetActive(false);
-    }
-
-    private void Awake()
-    {
-        if (!staticsInitialized)
-        {
-            ResetStatics();
-            staticsInitialized = true;
-        }
-
-        totalAnomalies++;
+            interactParticles.gameObject.SetActive(false); // Deactivate at start
     }
 
     public virtual void Interact()
@@ -208,11 +180,12 @@ public class InteractiveAnomaly : MonoBehaviour
     {
         anomalyFoundDict.Clear();
         totalAnomalies = 0;
-        staticsInitialized = false;
-        foreach (var anomaly in GameObject.FindObjectsByType<InteractiveAnomaly>(FindObjectsSortMode.None))
-        {
-            anomaly.hasBeenInteracted = false;
-            anomaly.SetInteractedState(false);
-        }
+    }
+
+    public static void CountAllAnomaliesInScene()
+    {
+        anomalyFoundDict.Clear();
+        var allAnomalies = Object.FindObjectsByType<InteractiveAnomaly>(FindObjectsSortMode.None);
+        totalAnomalies = allAnomalies.Length;
     }
 }

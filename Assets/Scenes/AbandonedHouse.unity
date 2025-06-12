@@ -21032,9 +21032,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalTime: 180
-  gameOverUI: {fileID: 0}
+  gameOverUI: {fileID: 771751040}
   HUD: {fileID: 1194190122}
-  timerText: {fileID: 0}
+  timerText: {fileID: 771751039}
 --- !u!64 &1196470315
 MeshCollider:
   m_ObjectHideFlags: 0
