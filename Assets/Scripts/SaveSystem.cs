@@ -8,12 +8,20 @@ public static class SaveSystem
     private static string SavePath => Path.Combine(Application.persistentDataPath, "gamesave.dat");
 
     [System.Serializable]
+    public class AnomalyState
+    {
+        public int id;
+        public bool hasBeenInteracted;
+    }
+
+    [System.Serializable]
     public class SaveData
     {
         public int anomaliesFound;
         public int totalAnomalies;
         public string currentScene;
         public List<int> foundAnomalyIDs = new List<int>();
+        public List<AnomalyState> anomalyStates = new List<AnomalyState>();
     }
 
     public static void SaveGame()
@@ -28,6 +36,17 @@ public static class SaveSystem
             currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name,
             foundAnomalyIDs = InteractiveAnomaly.GetFoundAnomalyIDs()
         };
+
+        // Save the state of every anomaly
+        var allAnomalies = GameObject.FindObjectsOfType<InteractiveAnomaly>();
+        foreach (var anomaly in allAnomalies)
+        {
+            data.anomalyStates.Add(new AnomalyState
+            {
+                id = anomaly.anomalyID,
+                hasBeenInteracted = anomaly.hasBeenInteracted
+            });
+        }
 
         Debug.Log($"Saving game data: Scene={data.currentScene}, Found={data.anomaliesFound}, Total={data.totalAnomalies}");
         Debug.Log($"Save file location: {SavePath}");
@@ -56,6 +75,20 @@ public static class SaveSystem
         {
             Debug.LogWarning($"No save file found at: {SavePath}");
             return null;
+        }
+    }
+
+    public static void RestoreAnomalyStates(List<AnomalyState> states)
+    {
+        var allAnomalies = GameObject.FindObjectsOfType<InteractiveAnomaly>();
+        foreach (var anomaly in allAnomalies)
+        {
+            var state = states.Find(s => s.id == anomaly.anomalyID);
+            if (state != null)
+            {
+                anomaly.hasBeenInteracted = state.hasBeenInteracted;
+                anomaly.SetInteractedState(state.hasBeenInteracted);
+            }
         }
     }
 

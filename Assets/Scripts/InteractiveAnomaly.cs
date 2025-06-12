@@ -13,7 +13,7 @@ public class InteractiveAnomaly : MonoBehaviour
     
     [SerializeField] private RandomBlink blinkingLight;
     
-    [SerializeField] protected bool hasBeenInteracted = false;  // Made serializable
+    [SerializeField] public bool hasBeenInteracted = false;
     private static int totalAnomalies = 0;  // Total number of anomaly objects in the scene
     private Camera mainCamera;
     public AnomalyMessageUI anomalyMessageUI; // Assign in Inspector
@@ -25,8 +25,21 @@ public class InteractiveAnomaly : MonoBehaviour
     [Tooltip("GameObject to show when the anomaly is solved (optional)")]
     public GameObject solvedObject;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip clearSound;
+
     private static Dictionary<int, bool> anomalyFoundDict = new Dictionary<int, bool>();
     private static bool staticsInitialized = false;
+
+    private void Awake()
+    {
+        // Reset statics if this is the first anomaly in the scene
+        if (FindObjectsByType<InteractiveAnomaly>(FindObjectsSortMode.None).Length == 1)
+        {
+            ResetStatics();
+        }
+    }
 
     private void Start()
     {
@@ -68,6 +81,7 @@ public class InteractiveAnomaly : MonoBehaviour
             if (interactParticles != null)
             {
                 interactParticles.gameObject.SetActive(true);
+                interactParticles.transform.position = transform.position;
                 interactParticles.Play();
             }
 
@@ -76,6 +90,11 @@ public class InteractiveAnomaly : MonoBehaviour
                 Destroy(component);
             }
             
+            if (audioSource != null && clearSound != null)
+            {
+                audioSource.PlayOneShot(clearSound);
+            }
+
             OnAnomalyInteracted();
         }
         else
@@ -94,7 +113,11 @@ public class InteractiveAnomaly : MonoBehaviour
             solvedObject.SetActive(true);
         
         if (interactParticles != null)
+        {
+            interactParticles.gameObject.SetActive(true);
+            interactParticles.transform.position = transform.position;
             interactParticles.Play();
+        }
     }
     
     // Public method to get the current anomaly count
@@ -139,6 +162,7 @@ public class InteractiveAnomaly : MonoBehaviour
             if (interactParticles != null)
             {
                 interactParticles.gameObject.SetActive(true);
+                interactParticles.transform.position = transform.position;
                 interactParticles.Play();
             }
             
