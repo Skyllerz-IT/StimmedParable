@@ -42,7 +42,11 @@ public class EnemyEyeController : MonoBehaviour
 
     [Header("Eyeball")]
     public Transform eyeball; // Assign your eyeball child here
-
+    
+    [Header("GameOver")]
+    public GameObject gameOverUI;
+    public GameObject HUD;
+    
     // Chase/cooldown state
     private bool isChasing = false;
     private float chaseTimer = 0f;
@@ -116,6 +120,7 @@ public class EnemyEyeController : MonoBehaviour
                 if (effectLerp >= 0.99f && !effectFullyWhite && stareTimer >= stareTimeToDie)
                 {
                     effectFullyWhite = true;
+                    GameOver();
                     Debug.Log("Player stared at the enemy and died.");
                 }
             }
@@ -317,7 +322,14 @@ public class EnemyEyeController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GameOver();
             Debug.Log("Player touched the enemy and died.");
         }
+    }
+
+    void GameOver()
+    {
+        HUD.SetActive(false);
+        gameOverUI.SetActive(true);
     }
 }
