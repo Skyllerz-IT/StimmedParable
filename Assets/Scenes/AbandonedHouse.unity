@@ -14920,7 +14920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 894532795290682200, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 894532795290682200, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -14929,7 +14929,7 @@ PrefabInstance:
     - target: {fileID: 894532795290682200, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 126099100}
+      objectReference: {fileID: 0}
     - target: {fileID: 894532795290682200, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -14940,7 +14940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 894532795290682200, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 894532795290682200, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -14948,11 +14948,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 894532795290682200, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 894532795290682200, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1648908752868318183, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
       propertyPath: m_Sprite
