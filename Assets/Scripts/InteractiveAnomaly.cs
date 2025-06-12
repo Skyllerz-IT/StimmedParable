@@ -33,14 +33,14 @@ public class InteractiveAnomaly : MonoBehaviour
     private static Dictionary<int, bool> anomalyFoundDict = new Dictionary<int, bool>();
     private static bool staticsInitialized = false;
 
-    private void Awake()
+    /*private void Awake()
     {
         // Reset statics if this is the first anomaly in the scene
         if (FindObjectsByType<InteractiveAnomaly>(FindObjectsSortMode.None).Length == 1)
         {
             ResetStatics();
         }
-    }
+    } */
 
     private void Start()
     {
