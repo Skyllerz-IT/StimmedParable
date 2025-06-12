@@ -56,6 +56,10 @@ public class EnemyEyeController : MonoBehaviour
     private bool isGameOver = false;
     public GameObject gameOverUI;
 
+    // Grace period for look interruption
+    private float notLookingTimer = 0f;
+    public float notLookingGracePeriod = 0.3f; // seconds
+
     void Awake()
     {
         playerCamera = Camera.main;
@@ -97,36 +101,46 @@ public class EnemyEyeController : MonoBehaviour
     {
         if (playerCamera == null || isGameOver) return;
 
-        // Make eyeball look at camera
         if (eyeball != null)
             eyeball.LookAt(playerCamera.transform.position);
 
         playerLookingAtEnemy = IsPlayerLookingAtMe();
 
-        if (!isChasing && !isCooldown)
+        if (playerLookingAtEnemy)
         {
-            if (playerLookingAtEnemy)
+            MoveTowardsPlayer();
+            stareTimer += Time.deltaTime;
+            notLookingTimer = 0f;
+
+            // Death logic: only stareTimer matters
+            if (!effectFullyWhite && stareTimer >= stareTimeToDie)
             {
-                MoveTowardsPlayer();
-                stareTimer += Time.deltaTime;
-                if (effectLerp >= 0.99f && !effectFullyWhite && stareTimer >= stareTimeToDie)
-                {
-                    effectFullyWhite = true;
-                    GameOver();
-                }
+                effectFullyWhite = true;
+                GameOver();
             }
-            else
+
+            if (!isChasing && !isCooldown && stareTimer > 0f)
             {
-                if (stareTimer > 0f)
-                {
-                    isChasing = true;
-                    chaseTimer = chaseDurationAfterLook;
-                    PlayChaseMusic();
-                }
-                stareTimer = 0f;
+                isChasing = true;
+                chaseTimer = chaseDurationAfterLook;
+                PlayChaseMusic();
             }
         }
-        else if (isChasing)
+        else
+        {
+            notLookingTimer += Time.deltaTime;
+            if (notLookingTimer >= notLookingGracePeriod)
+                stareTimer = 0f;
+
+            if (!isChasing && !isCooldown && stareTimer > 0f)
+            {
+                isChasing = true;
+                chaseTimer = chaseDurationAfterLook;
+                PlayChaseMusic();
+            }
+        }
+
+        if (isChasing)
         {
             if (playerLookingAtEnemy)
             {
@@ -142,19 +156,20 @@ public class EnemyEyeController : MonoBehaviour
                     isChasing = false;
                     isCooldown = true;
                     if (musicSource != null)
-                        musicSource.Stop(); // Stop music immediately
+                        musicSource.Stop();
                     PlayNormalMusic();
                     StartCoroutine(CooldownAndRespawn());
                 }
             }
         }
 
-        // VFX: active if being looked at or chasing
+        // VFX: lerp logic
         float targetLerp = 0f;
         if (playerLookingAtEnemy)
             targetLerp = Mathf.Clamp01(stareTimer / stareTimeToDie);
         else if (isChasing)
-            targetLerp = 0.2f; // Less intense during chase
+            targetLerp = 0.2f; // Fixed low value during chase if not looking
+
         effectLerp = Mathf.MoveTowards(effectLerp, targetLerp, Time.deltaTime / 0.5f);
 
         float flicker = (playerLookingAtEnemy || isChasing) ? Mathf.Sin(Time.time * flickerSpeed) * flickerAmount * effectLerp : 0f;
@@ -204,6 +219,7 @@ public class EnemyEyeController : MonoBehaviour
         transform.position += toPlayer * step;
     }
 
+    // Always pick the closest (not visible) spawn point to the player
     void TeleportSmartly()
     {
         if (spawnPoints.Length == 0 || playerTransform == null) return;
@@ -215,34 +231,27 @@ public class EnemyEyeController : MonoBehaviour
                 validPoints.Add(i);
         }
 
+        // If all are visible, use all
         if (validPoints.Count == 0)
         {
             for (int i = 0; i < spawnPoints.Length; i++)
                 validPoints.Add(i);
         }
 
-        int chosenIndex;
-        if (Random.value < 0.5f)
+        // Find the closest valid spawn point to the player
+        int closestIndex = validPoints[0];
+        float minDist = Vector3.Distance(playerTransform.position, spawnPoints[closestIndex].position);
+        foreach (int idx in validPoints)
         {
-            float maxDist = float.MinValue;
-            int farthest = validPoints[0];
-            foreach (int idx in validPoints)
+            float dist = Vector3.Distance(playerTransform.position, spawnPoints[idx].position);
+            if (dist < minDist)
             {
-                float dist = Vector3.Distance(playerTransform.position, spawnPoints[idx].position);
-                if (dist > maxDist)
-                {
-                    maxDist = dist;
-                    farthest = idx;
-                }
+                minDist = dist;
+                closestIndex = idx;
             }
-            chosenIndex = farthest;
-        }
-        else
-        {
-            chosenIndex = validPoints[Random.Range(0, validPoints.Count)];
         }
 
-        currentSpawnIndex = chosenIndex;
+        currentSpawnIndex = closestIndex;
         Transform target = spawnPoints[currentSpawnIndex];
         transform.position = target.position;
         transform.rotation = target.rotation;
@@ -263,19 +272,31 @@ public class EnemyEyeController : MonoBehaviour
         return viewportPos.z > 0 && viewportPos.x > 0 && viewportPos.x < 1 && viewportPos.y > 0 && viewportPos.y < 1;
     }
 
+    // Improved: forgiving look detection (on screen, angle, ignores small obstacles)
     bool IsPlayerLookingAtMe()
     {
         if (playerCamera == null) return false;
+
+        Vector3 viewportPos = playerCamera.WorldToViewportPoint(transform.position);
+        // Check if enemy is on screen (not too close to the edge)
+        bool onScreen = viewportPos.z > 0 && viewportPos.x > 0.1f && viewportPos.x < 0.9f && viewportPos.y > 0.1f && viewportPos.y < 0.9f;
+        if (!onScreen) return false;
+
+        // Check angle
         Vector3 dirToEnemy = (transform.position - playerCamera.transform.position).normalized;
-        float dot = Vector3.Dot(playerCamera.transform.forward, dirToEnemy);
+        float angle = Vector3.Angle(playerCamera.transform.forward, dirToEnemy);
+        if (angle > 30f) return false; // 30 degrees cone
+
+        // Raycast, but ignore obstacles very close to the enemy
         float dist = Vector3.Distance(playerCamera.transform.position, transform.position);
         Ray ray = new Ray(playerCamera.transform.position, dirToEnemy);
-        if (Physics.Raycast(ray, out RaycastHit hit, dist + 0.1f))
+        if (Physics.Raycast(ray, out RaycastHit hit, dist))
         {
-            if (hit.transform != this.transform)
+            if (hit.transform != this.transform && Vector3.Distance(hit.point, transform.position) > 0.5f)
                 return false;
         }
-        return dot > 0.98f;
+
+        return true;
     }
 
     void PlayChaseMusic()
