@@ -52,16 +52,9 @@ public class EnemyEyeController : MonoBehaviour
     private float flickerSpeed = 20f;
     private float flickerAmount = 0.3f;
 
-    void OnDrawGizmos()
-    {
-        if (spawnPoints == null) return;
-        Gizmos.color = Color.red;
-        foreach (var point in spawnPoints)
-        {
-            if (point != null)
-                Gizmos.DrawSphere(point.position, 0.3f);
-        }
-    }
+    // Game over logic
+    private bool isGameOver = false;
+    public GameObject gameOverUI;
 
     void Awake()
     {
@@ -95,11 +88,14 @@ public class EnemyEyeController : MonoBehaviour
             musicSource.loop = true;
             musicSource.Play();
         }
+
+        if (gameOverUI != null)
+            gameOverUI.SetActive(false);
     }
 
     void Update()
     {
-        if (playerCamera == null) return;
+        if (playerCamera == null || isGameOver) return;
 
         // Make eyeball look at camera
         if (eyeball != null)
@@ -116,7 +112,7 @@ public class EnemyEyeController : MonoBehaviour
                 if (effectLerp >= 0.99f && !effectFullyWhite && stareTimer >= stareTimeToDie)
                 {
                     effectFullyWhite = true;
-                    Debug.Log("Player stared at the enemy and died.");
+                    GameOver();
                 }
             }
             else
@@ -195,7 +191,7 @@ public class EnemyEyeController : MonoBehaviour
 
             yield return new WaitForSeconds(waitTime);
 
-            if (!playerLookingAtEnemy && !isChasing && !isCooldown)
+            if (!playerLookingAtEnemy && !isChasing && !isCooldown && !isGameOver)
                 TeleportSmartly();
         }
     }
@@ -208,13 +204,10 @@ public class EnemyEyeController : MonoBehaviour
         transform.position += toPlayer * step;
     }
 
-    // --- SMART TELEPORT LOGIC BELOW ---
-
     void TeleportSmartly()
     {
         if (spawnPoints.Length == 0 || playerTransform == null) return;
 
-        // Gather spawn points not in line of sight
         var validPoints = new System.Collections.Generic.List<int>();
         for (int i = 0; i < spawnPoints.Length; i++)
         {
@@ -222,18 +215,15 @@ public class EnemyEyeController : MonoBehaviour
                 validPoints.Add(i);
         }
 
-        // If all are visible, fallback to all points
         if (validPoints.Count == 0)
         {
             for (int i = 0; i < spawnPoints.Length; i++)
                 validPoints.Add(i);
         }
 
-        // Randomly choose between farthest or random
         int chosenIndex;
         if (Random.value < 0.5f)
         {
-            // Farthest valid point
             float maxDist = float.MinValue;
             int farthest = validPoints[0];
             foreach (int idx in validPoints)
@@ -249,7 +239,6 @@ public class EnemyEyeController : MonoBehaviour
         }
         else
         {
-            // Random valid point
             chosenIndex = validPoints[Random.Range(0, validPoints.Count)];
         }
 
@@ -267,11 +256,9 @@ public class EnemyEyeController : MonoBehaviour
         Ray ray = new Ray(playerCamera.transform.position, dir);
         if (Physics.Raycast(ray, out RaycastHit hit, dist + 0.1f))
         {
-            // If the ray hits something before the point, it's not visible
             if ((hit.point - point).sqrMagnitude > 0.01f)
                 return false;
         }
-        // Check if within camera view
         Vector3 viewportPos = playerCamera.WorldToViewportPoint(point);
         return viewportPos.z > 0 && viewportPos.x > 0 && viewportPos.x < 1 && viewportPos.y > 0 && viewportPos.y < 1;
     }
@@ -315,9 +302,20 @@ public class EnemyEyeController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isGameOver)
         {
-            Debug.Log("Player touched the enemy and died.");
+            GameOver();
         }
+    }
+
+    public void GameOver()
+    {
+        if (isGameOver) return;
+        isGameOver = true;
+
+        if (musicSource != null) musicSource.Stop();
+        if (gameOverUI != null) gameOverUI.SetActive(true);
+
+        Debug.Log("Game Over");
     }
 }

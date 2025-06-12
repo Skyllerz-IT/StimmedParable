@@ -19896,6 +19896,7 @@ MonoBehaviour:
   chaseMusic: {fileID: 8300000, guid: 7499179ce2f1d40bf84a913bc38d49dc, type: 3}
   normalMusic: {fileID: 0}
   eyeball: {fileID: 1314794655}
+  gameOverUI: {fileID: 771751040}
 --- !u!135 &1099173591
 SphereCollider:
   m_ObjectHideFlags: 0
