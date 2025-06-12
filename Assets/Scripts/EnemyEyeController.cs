@@ -158,7 +158,7 @@ public class EnemyEyeController : MonoBehaviour
         if (playerLookingAtEnemy)
             targetLerp = Mathf.Clamp01(stareTimer / stareTimeToDie);
         else if (isChasing)
-            targetLerp = 0.1f; // Less intense during chase
+            targetLerp = 0.2f; // Less intense during chase
         effectLerp = Mathf.MoveTowards(effectLerp, targetLerp, Time.deltaTime / 0.5f);
 
         float flicker = (playerLookingAtEnemy || isChasing) ? Mathf.Sin(Time.time * flickerSpeed) * flickerAmount * effectLerp : 0f;
