@@ -4694,6 +4694,10 @@ PrefabInstance:
       propertyPath: anomalyMessageUI
       value: 
       objectReference: {fileID: 1341578439}
+    - target: {fileID: 8885598158387395244, guid: ae4e1bed1d2c64bea8cceefeff47c28b, type: 3}
+      propertyPath: anomalyUIManager
+      value: 
+      objectReference: {fileID: 745287374}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14488,6 +14492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 745287373}
+  - component: {fileID: 745287374}
   m_Layer: 0
   m_Name: Anomalies1
   m_TagString: Untagged
@@ -14516,6 +14521,19 @@ Transform:
   - {fileID: 1265074028}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &745287374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745287372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8e6fe3158b4b308fa93c5f3edc8b3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anomalyProgressText: {fileID: 771751041}
 --- !u!64 &748904434
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15133,6 +15151,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1861102178636893371, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
   m_PrefabInstance: {fileID: 771751037}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &771751041 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6117738013299501799, guid: f6b33a2ac4e014d31a90f2caa33b8311, type: 3}
+  m_PrefabInstance: {fileID: 771751037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!64 &772430001
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15655,6 +15684,7 @@ MonoBehaviour:
   blinkingLight: {fileID: 0}
   hasBeenInteracted: 0
   anomalyMessageUI: {fileID: 1341578439}
+  anomalyUIManager: {fileID: 745287374}
   interactParticles: {fileID: 0}
   anomalyID: 0
   solvedObject: {fileID: 409206664}
@@ -20488,6 +20518,7 @@ MonoBehaviour:
   blinkingLight: {fileID: 1265074031}
   hasBeenInteracted: 0
   anomalyMessageUI: {fileID: 1341578439}
+  anomalyUIManager: {fileID: 745287374}
   interactParticles: {fileID: 0}
   anomalyID: 1
   solvedObject: {fileID: 0}
@@ -20624,6 +20655,7 @@ MonoBehaviour:
   blinkingLight: {fileID: 0}
   hasBeenInteracted: 0
   anomalyMessageUI: {fileID: 1341578439}
+  anomalyUIManager: {fileID: 745287374}
   interactParticles: {fileID: 0}
   anomalyID: 3
   solvedObject: {fileID: 0}
@@ -28596,6 +28628,7 @@ MonoBehaviour:
   blinkingLight: {fileID: 0}
   hasBeenInteracted: 0
   anomalyMessageUI: {fileID: 1341578439}
+  anomalyUIManager: {fileID: 745287374}
   interactParticles: {fileID: 0}
   anomalyID: 4
   solvedObject: {fileID: 0}
