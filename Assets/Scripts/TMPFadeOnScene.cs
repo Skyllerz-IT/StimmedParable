@@ -62,6 +62,7 @@ public class TMPFadeOnScene : MonoBehaviour
             yield return null;
         }
         canvasGroup.alpha = 0f;
+        Destroy(gameObject);
     }
 
     // Update is called once per frame

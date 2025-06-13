@@ -30604,7 +30604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4019106834139708446, guid: 9124bd14a010641829327db0e9a6b5b9, type: 3}
       propertyPath: moveSpeed
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4019106834139708446, guid: 9124bd14a010641829327db0e9a6b5b9, type: 3}
       propertyPath: groundCheck
